@@ -1,20 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## Decisiones de Arquitectura y Cambios del Parcial
 
-First, run the development server:
+### Punto 1: Evolución del Contexto
+
+El carrito ya no manejar productos individuales, maneja objetos "CartItem", cada uno compuesto por el producto y su "quantity".
+
+En el preparcial ya tenía algo de este estilo, para agregar una "quantity" y eliminarla por completo, pero lo único que agregué fue la funcionalidad de disminuir en una unidad este contador.
+
+Todas las operaciones usan de "useState" y crean nuevos arreglos y objetos con "map", "filter" y "spread. así garantizamos que no se cambien directamente las referencias previas y los componentes que consumen "CartContext" reciben actualizaciones predecibles.
+
+
+### Punto 2: Cálculo de Totales
+
+Los totales "totalItemsCount" y "totalPrice" se calculan durante cada renderización usandio "reduce", usando la cantidad de cada "CartItem". 
+No se almacenan como estados separados porque son valores derivados del carrito; así se evita duplicar información y que el total pueda quedar desincronizado después de una modificación.
+
+
+### Punto 3: Arquitectura del Formulario
+
+La ruta "src/app/checkout" es un componente de cliente, ya que  necesita eventos, estado local y consumo del contexto global.
+
+Cada campo es controlado por React, y sus cambios se actualizan con "onChange". 
+
+La verificación de: nombre, correo, método de pago y términos queda centralizada en una función que viene  del estado actual.
+
+ los mensajes de nombre y correo solo aparecen después de marcar el campo como visitado con "onBlur". Lo cuál quiere decir que si el usuario no escribe nada en el campo coorespondiente (lo deja vacío pero igual lo "visita") va a aparecer el mensaje de error de todas formas!
+
+El envío del formulario usa "preventDefault", esto bloquea el botón durante una operación asíncrona  y evita envíos duplicados.
+
+Al finalizar, se debría ejecutar "clearCart" (pero no me dio), esto debería reiniciar los valores y campos visitado.
+
+
+La navegación al checkout se ofrece de dos formas: dese el "Header" y desde el resumen del carrito.
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------
+
+
+
+
+Esto estaba en el Preparcial... Lo dejaré quieto
+
+## Como ejecutar? ->
+
+Primero ejecutar el comando:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+Abrir [http://localhost:3000](http://localhost:3000) en el navegador para visualizar la página.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 

@@ -13,16 +13,24 @@ export default function Header() {
           Shop<span className="text-blue-500">Hub</span>
         </Link>
 
-        <Link
-          href="/carrito"
-          className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-full border border-slate-700 transition"
-        >
-          <span className="text-xl">🛒</span>
-          <span className="font-semibold text-sm">Carrito:</span>
-          <span className="bg-blue-600 text-white font-bold text-xs px-2.5 py-1 rounded-full">
-            {totalItemsCount}
-          </span>
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/carrito"
+            className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-full border border-slate-700 transition"
+          >
+            <span className="text-xl">🛒</span>
+            <span className="font-semibold text-sm">Carrito:</span>
+            <span className="bg-blue-600 text-white font-bold text-xs px-2.5 py-1 rounded-full">
+              {totalItemsCount}
+            </span>
+          </Link>
+          <Link
+            href="/checkout"
+            className="hidden sm:inline-flex bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-full font-semibold text-sm transition"
+          >
+            Checkout
+          </Link>
+        </div>
       </div>
     </header>
   );

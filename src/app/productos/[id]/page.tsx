@@ -35,7 +35,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
       <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-slate-800">
         <div className="relative h-64 w-full bg-slate-100 rounded-xl overflow-hidden">
-          <img
+          <img 
             src={product.thumbnail}
             alt={product.title}
             className="w-full h-full object-cover"
